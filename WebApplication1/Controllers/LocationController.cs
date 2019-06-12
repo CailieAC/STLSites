@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using STLSites.Models;
+using STLSites.Data;
 using WebApplication1.Data;
+using STLSites.ViewModels.Location;
 
 namespace STLSites.Controllers
 {
@@ -20,8 +22,13 @@ namespace STLSites.Controllers
         public IActionResult Index()
         {
             //context.Locations is a set (a unique type of list)
+            //Below is how it was from class, to do entity framework/database stuff
             List<Location> locations = context.Locations.ToList();
-            return View();
+
+            //Below is how we did it before with just ViewModels
+            //var locations = LocationListItemViewModel.GetLocationList();
+            return View(locations);
+
         }
 
         //Can research adding a service layer, and adding IRepository to hide DB stuff
@@ -33,12 +40,13 @@ namespace STLSites.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Location location)
+        public IActionResult Create(LocationCreateViewModel model)
         {
             //Take the location object you got from the controller
             //adding it to the context, which is associated with the DB
             //
-            context.Add(location);
+            model.Persist();
+            context.Add(model);
             //Call save changes to actually update DB and make it persist
             //only need to save changes once at the end of method
             context.SaveChanges();
