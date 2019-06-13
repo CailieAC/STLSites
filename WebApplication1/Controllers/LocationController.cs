@@ -45,7 +45,9 @@ namespace STLSites.Controllers
             //Take the location object you got from the controller
             //adding it to the context, which is associated with the DB
             //
-            model.Persist();
+            model.Persist(context);
+            //context.add assigns the next id to the model from the database
+            //does context.add have a return type?
             context.Add(model);
             //Call save changes to actually update DB and make it persist
             //only need to save changes once at the end of method

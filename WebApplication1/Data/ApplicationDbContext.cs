@@ -11,7 +11,7 @@ namespace WebApplication1.Data
     {
         //DbSet maps to a location for the <class>
         public DbSet<Location> Locations { get; set; }
-
+        
         //TODO Do I need to add the below?
         public DbSet<IModel> IModels { get; set; }
 

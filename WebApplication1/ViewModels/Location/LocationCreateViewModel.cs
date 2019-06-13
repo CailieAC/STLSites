@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using STLSites.Data;
 using STLSites.Models;
+using WebApplication1.Data;
 
 namespace STLSites.ViewModels.Location
 {
@@ -12,7 +13,7 @@ namespace STLSites.ViewModels.Location
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public void Persist()
+        public void Persist(ApplicationDbContext context)
         {
             Models.Location location = new Models.Location
             {
